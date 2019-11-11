@@ -1,7 +1,7 @@
 {
-    "name": "Tests1",
+    "name": "DionTests",
     "references": [
-        "scripts"
+        "DionScripts"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

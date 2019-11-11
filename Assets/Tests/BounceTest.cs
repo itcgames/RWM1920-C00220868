@@ -6,7 +6,7 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class DecimalToAsciiTest
+    public class BounceTest
     {
         // A Test behaves as an ordinary method
         [Test]
@@ -14,7 +14,7 @@ namespace Tests
         {
             int[] input = { };
             string expected = null;
-            string result = DecimalToAscii.convert(input);
+            string result = Bounce.convert(input);
             Assert.AreEqual(expected, result);
         }
 
@@ -23,7 +23,7 @@ namespace Tests
         {
             int[] input = { 32 };
             string expected = " ";
-            string result = DecimalToAscii.convert(input);
+            string result = Bounce.convert(input);
             Assert.AreEqual(expected, result);
         }
 
@@ -32,7 +32,7 @@ namespace Tests
         {
             int[] input = { 32,33 };
             string expected = " !";
-            string result = DecimalToAscii.convert(input);
+            string result = Bounce.convert(input);
             Assert.AreEqual(expected, result);
         }
     }

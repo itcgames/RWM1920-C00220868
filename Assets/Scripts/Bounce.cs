@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecimalToAscii
+public class Bounce : MonoBehaviour
 {
     public static string convert(int[] t_input)
     {
