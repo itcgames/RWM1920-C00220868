@@ -10,30 +10,17 @@ namespace Tests
     {
         // A Test behaves as an ordinary method
         [Test]
-        public void DecimalToAsciiMostSimplePasses()
+        public void BounceSimplePass()
         {
-            int[] input = { };
-            string expected = null;
-            string result = Bounce.convert(input);
-            Assert.AreEqual(expected, result);
+            GameObject gameObject = new GameObject();
+            Assert.AreNotEqual(1, 1);
         }
 
         [Test]
-        public void DecimalToAsciiSingleInt()
+        public void BounceComplexPass()
         {
-            int[] input = { 32 };
-            string expected = " ";
-            string result = Bounce.convert(input);
-            Assert.AreEqual(expected, result);
-        }
-
-        [Test]
-        public void DecimalToAsciiDoubleInt()
-        {
-            int[] input = { 32,33 };
-            string expected = " !";
-            string result = Bounce.convert(input);
-            Assert.AreEqual(expected, result);
+            GameObject gameObject = new GameObject();
+            Assert.AreNotEqual(1, 1);
         }
     }
 }

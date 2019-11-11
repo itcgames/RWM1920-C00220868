@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Bounce : MonoBehaviour
 {
-    public static string convert(int[] t_input)
+    public static GameObject bounce(GameObject gameObject)
     {
-        string resultString = null;
-        for (int i = 0; i < t_input.Length; i++)
+        // if collides
+       // if (gameObject.velocity.x == 0)
         {
-            resultString += System.Convert.ToChar(t_input[i]);
+            //gameObject.velocity.y *= -1;
         }
-
-        return resultString;
+        return gameObject;
     }
 }
