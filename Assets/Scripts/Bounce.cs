@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Bounce : MonoBehaviour
 {
-    public static GameObject bounce(GameObject gameObject)
+    void OnCollisionEnter(Collision col)
     {
-        // if collides
-       // if (gameObject.velocity.x == 0)
+        // something like if the collision is from the top side
+        if (col.gameObject.GetComponent<Transform>().position.y >= this.gameObject.GetComponent<Transform>().position.y)
         {
-            //gameObject.velocity.y *= -1;
+            bounce(col.gameObject);
         }
-        return gameObject;
+    }
+    public void bounce(GameObject other)
+    {
+        // bounce maths
     }
 }
