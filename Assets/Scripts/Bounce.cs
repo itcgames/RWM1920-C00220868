@@ -9,13 +9,11 @@ public class Bounce : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Collision?");
-
+        Debug.Log("Collision");
         // something like if the collision is from the top side
         if (col.gameObject.GetComponent<Transform>().position.y >= this.gameObject.GetComponent<Transform>().position.y)
         {
-            Debug.Log("Above?");
-
+            Debug.Log("Above");
             bounce(col.gameObject);
         }
     }
