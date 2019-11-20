@@ -10,17 +10,24 @@ namespace Tests
     {
         // A Test behaves as an ordinary method
         [Test]
-        public void BounceSimplePass()
+        public void BounceTestSimplePasses()
         {
-            GameObject gameObject = new GameObject();
-            Assert.AreNotEqual(1, 1);
+            //Bounce bounce = new Bounce();
+            //bounce.bounce(new GameObject());
+            Assert.AreEqual(1, 1);
         }
 
-        [Test]
-        public void BounceComplexPass()
+        // A UnityTest behaves like a coroutine in Play Mode.
+        [UnityTest]
+        public IEnumerator BounceTestWithEnumeratorPasses()
         {
-            GameObject gameObject = new GameObject();
-            Assert.AreNotEqual(1, 1);
+            // Use the Assert class to test conditions.
+            // Use yield to skip a frame.
+            GameObject trampoline = MonoBehaviour.Instantiate(Resources.Load<GameObject>("./Prefabs/Trampoline"));
+            Vector3 initialPos = trampoline.transform.position;
+            yield return new WaitForSeconds(1);
+            Vector3 endPos = trampoline.transform.position;
+            Assert.Greater(endPos.y, initialPos.y);
         }
     }
 }
