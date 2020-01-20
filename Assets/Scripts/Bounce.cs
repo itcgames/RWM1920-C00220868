@@ -6,9 +6,23 @@ public class Bounce : MonoBehaviour
 {
     public float bounceAmount = 10;
     private Vector2 velocity;
-
-    void OnCollisionEnter2D(Collision2D col)
+    private const float MOVE = -0.75f;
+    private const float SCALE_X = 0.15f;
+    private const float SCALE_Y = -0.25f;
+    private Vector3 defaultPos;
+    private Vector3 defaultScale;
+    private void Start()
     {
+        defaultPos = this.GetComponent<Transform>().position;
+        defaultScale = this.GetComponent<Transform>().localScale;
+    }
+
+void OnCollisionEnter2D(Collision2D col)
+    {
+        // reset to defaults if a second collision starts before previous has finished
+        StopAllCoroutines();
+        this.GetComponent<Transform>().localScale = defaultScale;
+        this.GetComponent<Transform>().position = defaultPos;
         // something like if the collision is from the top side
         if (col.gameObject.GetComponent<Transform>().position.y >= this.gameObject.GetComponent<Transform>().position.y)
         {
@@ -25,14 +39,16 @@ public class Bounce : MonoBehaviour
         velocity = other.GetComponent<Rigidbody2D>().velocity;
         velocity.y = 0;
         other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, bounceAmount));
-        animate();
+        StartCoroutine(animate());
     }
 
     IEnumerator animate()
     {
-        Debug.Log("Animate");
-        this.GetComponent<SpriteRenderer>().transform.localScale += new Vector3(10, -20, 0);
-        yield return new WaitForSeconds(1);
-        this.GetComponent<SpriteRenderer>().transform.localScale -= new Vector3(10, -20, 0);
+        this.GetComponent<Transform>().localScale += new Vector3(SCALE_X, SCALE_Y, 0);
+        this.GetComponent<Transform>().position += new Vector3(0, MOVE, 0);
+        yield return new WaitForSeconds(0.22f);
+        this.GetComponent<Transform>().localScale -= new Vector3(SCALE_X, SCALE_Y, 0);
+        this.GetComponent<Transform>().position -= new Vector3(0, MOVE, 0);
+
     }
 }
