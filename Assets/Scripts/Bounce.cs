@@ -46,7 +46,7 @@ void OnCollisionEnter2D(Collision2D col)
     {
         this.GetComponent<Transform>().localScale += new Vector3(SCALE_X, SCALE_Y, 0);
         this.GetComponent<Transform>().position += new Vector3(0, MOVE, 0);
-        yield return new WaitForSeconds(0.22f);
+        yield return new WaitForSeconds(0.1f);
         this.GetComponent<Transform>().localScale -= new Vector3(SCALE_X, SCALE_Y, 0);
         this.GetComponent<Transform>().position -= new Vector3(0, MOVE, 0);
 
