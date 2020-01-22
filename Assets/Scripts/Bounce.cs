@@ -11,13 +11,22 @@ public class Bounce : MonoBehaviour
     private const float SCALE_Y = -0.25f;
     private Vector3 defaultPos;
     private Vector3 defaultScale;
+    private int bounceCount = 0;
     private void Start()
     {
         defaultPos = this.GetComponent<Transform>().position;
         defaultScale = this.GetComponent<Transform>().localScale;
     }
 
-void OnCollisionEnter2D(Collision2D col)
+    private void Update()
+    {
+        if (bounceCount >= 9)
+        {
+            breakBox();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
     {
         // reset to defaults if a second collision starts before previous has finished
         StopAllCoroutines();
@@ -39,6 +48,7 @@ void OnCollisionEnter2D(Collision2D col)
         velocity = other.GetComponent<Rigidbody2D>().velocity;
         velocity.y = 0;
         other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, bounceAmount));
+        bounceCount++;
         StartCoroutine(animate());
     }
 
@@ -50,5 +60,10 @@ void OnCollisionEnter2D(Collision2D col)
         this.GetComponent<Transform>().localScale -= new Vector3(SCALE_X, SCALE_Y, 0);
         this.GetComponent<Transform>().position -= new Vector3(0, MOVE, 0);
 
+    }
+
+    private void breakBox()
+    {
+        this.gameObject.SetActive(false);
     }
 }
