@@ -20,7 +20,7 @@ public class Bounce : MonoBehaviour
 
     private void Update()
     {
-        if (bounceCount >= 9)
+        if (bounceCount >= 3)
         {
             breakBox();
         }
@@ -40,16 +40,19 @@ public class Bounce : MonoBehaviour
     }
     public void bounce(GameObject other)
     {
-        if (GetComponent<AudioSource>().isPlaying)
+        if (this.enabled) // allows breaking trampoline
         {
-            GetComponent<AudioSource>().Stop();
+            if (GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<AudioSource>().Stop();
+            }
+            GetComponent<AudioSource>().Play();
+            velocity = other.GetComponent<Rigidbody2D>().velocity;
+            velocity.y = 0;
+            other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, bounceAmount));
+            bounceCount++;
+            StartCoroutine(animate());
         }
-        GetComponent<AudioSource>().Play();
-        velocity = other.GetComponent<Rigidbody2D>().velocity;
-        velocity.y = 0;
-        other.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, bounceAmount));
-        bounceCount++;
-        StartCoroutine(animate());
     }
 
     IEnumerator animate()
@@ -64,6 +67,19 @@ public class Bounce : MonoBehaviour
 
     private void breakBox()
     {
-        this.gameObject.SetActive(false);
+        SpriteRenderer[] spriteRenderers = this.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer source in spriteRenderers)
+        {
+            
+            if (source.gameObject.tag == "crate")
+            {
+                source.gameObject.SetActive(false);
+            }
+            if (source.gameObject.tag == "tear")
+            {
+                source.enabled = true;
+            }
+        }
+        this.enabled = false;
     }
 }
