@@ -1,1 +1,1 @@
-Delete lib
+The final User Guide pdf can be found under path "Unity Technologies\Documentation"
